@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "My extension doesn't do anything yet!",
     "manifest_version": 2,
+    "action": {
+      "default_popup": "popup.html"
+    },
     "content_scripts": [
     {
       "matches": ["https://youtube.com/*"],
