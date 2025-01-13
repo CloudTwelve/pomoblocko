@@ -1,6 +1,14 @@
+const generateHTML = (pageName) => {
+    return `fill in later inshaAllah`;
+}
+
 if (window.location.hostname === "www.youtube.com") {
     
 }
+
+// user input fills inshaAllah
+let blockedSites = [];
+
 let messages = [
     "That was kinda uncool.",
     "... looks like SOMEBODY needs to finish some work.",
@@ -13,3 +21,7 @@ let messages = [
     "idk, imo you should get to work.",
     "what's up? your work ethic should be."
 ];
+
+const genSiteURL = (url) => {
+    return url += "/*";
+}
