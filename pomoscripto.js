@@ -1,5 +1,5 @@
 const getHTML = async () => {
-    const response = fetch('../landing.html');
+    const response = await fetch('../landing.html');
     
     if (!response.ok) {
         throw new Error(`Failed to fetch. Status: ${response.status}`);
@@ -11,7 +11,7 @@ const getHTML = async () => {
     }
 
 const getCSS = async () => {
-    const response = fetch('../landingstyles.css');
+    const response = await fetch('../landingstyles.css');
     
     if (!response.ok) {
         throw new Error(`Failed to fetch. Status: ${response.status}`);
@@ -23,13 +23,13 @@ const getCSS = async () => {
     }
 
 if (blockedSites.includes(window.location.hostname)) {
-    document.body.innerHTML = getHTML();
-    document.head.innerHTML = getCSS();
+    document.body.innerHTML = await getHTML();
+    document.head.innerHTML = await getCSS();
 
 }
 
 // user input fills inshaAllah
-let blockedSites = ["https://youtube.com/*"];
+let blockedSites = ["youtube.com"];
 
 let placesToDonateTo = [
     ["https://irusa.org/middle-east/palestine/", "Palestine"],
