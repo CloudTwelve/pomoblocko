@@ -29,7 +29,7 @@ if (blockedSites.includes(window.location.hostname)) {
 }
 
 // user input fills inshaAllah
-let blockedSites = ["youtube.com"];
+let blockedSites = ["www.youtube.com"];
 
 let placesToDonateTo = [
     ["https://irusa.org/middle-east/palestine/", "Palestine"],
