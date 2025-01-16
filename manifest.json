@@ -2,7 +2,7 @@
     "name": "Pomoblocko",
     "version": "1.0.0",
     "description": "My extension doesn't do anything yet!",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "action": {
       "default_popup": "popup.html"
     },
