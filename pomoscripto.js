@@ -23,8 +23,8 @@ const getCSS = async () => {
     }
 
 if (blockedSites.includes(window.location.hostname)) {
-    document.body.innerHTML = await getHTML();
-    document.head.innerHTML = await getCSS();
+    document.body.innerHTML = getHTML();
+    document.head.innerHTML = getCSS();
 
 }
 
