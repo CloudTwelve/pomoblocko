@@ -22,13 +22,7 @@ const getCSS = async () => {
     return css;
     }
 
-if (blockedSites.includes(window.location.hostname)) {
-    document.body.innerHTML = getHTML();
-    document.head.innerHTML = getCSS();
-
-}
-
-// user input fills inshaAllah
+// user input fills this inshaAllah    
 let blockedSites = ["www.youtube.com"];
 
 let placesToDonateTo = [
@@ -44,6 +38,12 @@ let placesToDonateTo = [
 
 const genSiteURL = (url) => {
     return url += "/*";
+}
+    
+if (blockedSites.includes(window.location.hostname)) {
+    document.body.innerHTML = getHTML();
+    document.head.innerHTML = getCSS();
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
