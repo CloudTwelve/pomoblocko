@@ -1,33 +1,35 @@
-const htmlText = "<div class="text-container">
-    </div>
-    <div class="text-container"></div>
-    <div class="gradient-bg">
-      <svg xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
-            <feBlend in="SourceGraphic" in2="goo" />
-          </filter>
-        </defs>
-      </svg>
-      <div class="gradients-container">
-        <div class="g1"></div>
-        <div class="g2"></div>
-        <div class="g3"></div>
-        <div class="g4"></div>
-        <div class="g5"></div>
-        <div class="interactive"></div>
-      </div>
-    </div>";
-}
+const getHTML = async () => {
+    const response = fetch('../landing.html');
+    
+    if (!response.ok) {
+        throw new Error(`Failed to fetch. Status: ${response.status}`);
+    }
 
-if (window.location.hostname === "www.youtube.com") {
-    document.body.innerHTML = 
+    const html = await response.text();
+
+    return html;
+    }
+
+const getCSS = async () => {
+    const response = fetch('../landingstyles.css');
+    
+    if (!response.ok) {
+        throw new Error(`Failed to fetch. Status: ${response.status}`);
+    }
+
+    const css = await response.text();
+
+    return css;
+    }
+
+if (blockedSites.includes(window.location.hostname)) {
+    document.body.innerHTML = getHTML();
+    document.head.innerHTML = getCSS();
+
 }
 
 // user input fills inshaAllah
-let blockedSites = [];
+let blockedSites = ["https://youtube.com/*"];
 
 let placesToDonateTo = [
     ["https://irusa.org/middle-east/palestine/", "Palestine"],
