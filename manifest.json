@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "My extension doesn't do anything yet!",
     "manifest_version": 3,
+    "permissions": ["activeTab"],
     "action": {
       "default_popup": "popup.html"
     },
@@ -17,5 +18,5 @@
         "resources": ["landing.html", "landingstyles.css", "landingscript.js"],
         "matches": ["<all_urls>"]
       }
-  ]
+    ]
 }
