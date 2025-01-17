@@ -1,9 +1,5 @@
 const getHTML = async () => {
     const response = await fetch('landing.html');
-    
-    if (!response.ok) {
-        throw new Error(`Failed to fetch. Status: ${response.status}`);
-    }
 
     const html = await response.text();
 
@@ -12,10 +8,6 @@ const getHTML = async () => {
 
 const getCSS = async () => {
     const response = await fetch('landingstyles.css');
-    
-    if (!response.ok) {
-        throw new Error(`Failed to fetch. Status: ${response.status}`);
-    }
 
     const css = await response.text();
 
