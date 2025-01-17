@@ -48,7 +48,7 @@ if (blockedSites.includes(window.location.hostname)) {
     });
 
     const scriptElement = document.createElement('script');
-    scriptElement.src = 'landingscript.js';
+    scriptElement.src = chrome.runtime.getURL('landingscript.js');
     document.body.appendChild(scriptElement);
     
   }
