@@ -40,7 +40,9 @@ if (blockedSites.includes(window.location.hostname)) {
     });
   
     getCSS().then(cssContent => {
-      document.head.innerHTML = cssContent;
+      const styleElement = document.createElement('style');
+      styleElement.textContent = cssContent;
+      document.head.appendChild(styleElement);
     }).catch(error => {
       console.error("Error loading CSS:", error);
     });
