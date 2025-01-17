@@ -41,10 +41,18 @@ const genSiteURL = (url) => {
 }
     
 if (blockedSites.includes(window.location.hostname)) {
-    document.body.innerHTML = getHTML();
-    document.head.innerHTML = getCSS();
-
-}
+    getHTML().then(htmlContent => {
+      document.body.innerHTML = htmlContent;
+    }).catch(error => {
+      console.error("Error loading HTML:", error);
+    });
+  
+    getCSS().then(cssContent => {
+      document.head.innerHTML = cssContent;
+    }).catch(error => {
+      console.error("Error loading CSS:", error);
+    });
+  }
 
 document.addEventListener('DOMContentLoaded', () => {
     let donationLink = document.querySelector("#donation-link");
