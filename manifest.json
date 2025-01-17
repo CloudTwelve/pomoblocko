@@ -11,5 +11,9 @@
       "matches": ["<all_urls>"],
       "js": ["pomoscripto.js"]
     }
-    ]
+    ],
+    "web_accessible_resources": [
+      "landing.html",
+      "landingstyles.css"
+  ]
 }
