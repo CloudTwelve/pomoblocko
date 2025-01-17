@@ -55,10 +55,13 @@ if (blockedSites.includes(window.location.hostname)) {
       console.error("Error loading CSS:", error);
     });
 
-    const scriptElement = document.createElement('script');
-    scriptElement.src = chrome.runtime.getURL('landingscript.js');
-    document.body.appendChild(scriptElement);
-
+    getJS().then(jsContent => {
+      const scriptElement = document.createElement('script');
+      scriptElement.src = chrome.runtime.getURL('landingscript.js');
+      document.body.appendChild(scriptElement);
+      }).catch(error => {
+        console.error("Error loading JS:", error);
+      });
     
   }
 
