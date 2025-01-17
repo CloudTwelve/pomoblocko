@@ -14,14 +14,6 @@ const getCSS = async () => {
     return css;
     }
 
-const getJS = async () => {
-    const response = await fetch(chrome.runtime.getURL('landingscript.js'));
-
-    const js = await response.text();
-
-    return js;
-}
-
 // user input fills this inshaAllah    
 let blockedSites = ["www.youtube.com"];
 
@@ -55,13 +47,9 @@ if (blockedSites.includes(window.location.hostname)) {
       console.error("Error loading CSS:", error);
     });
 
-    getJS().then(jsContent => {
-      const scriptElement = document.createElement('script');
-      scriptElement.textContent = jsContent;
-      document.body.appendChild(scriptElement);
-      }).catch(error => {
-        console.error("Error loading JS:", error);
-      });
+    const scriptElement = document.createElement('script');
+    scriptElement.src = 'landingscript.js';
+    document.body.appendChild(scriptElement);
     
   }
 
