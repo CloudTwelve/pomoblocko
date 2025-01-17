@@ -57,7 +57,7 @@ if (blockedSites.includes(window.location.hostname)) {
 
     getJS().then(jsContent => {
       const scriptElement = document.createElement('script');
-      scriptElement.src = jsContent;
+      scriptElement.textContent = jsContent;
       document.body.appendChild(scriptElement);
       }).catch(error => {
         console.error("Error loading JS:", error);
