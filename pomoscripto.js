@@ -1,5 +1,5 @@
 const getHTML = async () => {
-    const response = await fetch('landing.html');
+    const response = await fetch(chrome.runtime.getURL('landing.html'));
 
     const html = await response.text();
 
@@ -7,7 +7,7 @@ const getHTML = async () => {
     }
 
 const getCSS = async () => {
-    const response = await fetch('landingstyles.css');
+    const response = await fetch(chrome.runtime.getURL('landing-styles.css'));
 
     const css = await response.text();
 
