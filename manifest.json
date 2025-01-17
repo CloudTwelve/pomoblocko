@@ -11,7 +11,11 @@
     {
       "matches": ["<all_urls>"],
       "js": ["pomoscripto.js"]
-    }
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["landingscript.js"]
+    },
     ],
     "web_accessible_resources": [
       {
