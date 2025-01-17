@@ -14,8 +14,8 @@
     ],
     "web_accessible_resources": [
       {
-        "landing.html",
-        "landingstyles.css"
+        "resources": ["landing.html", "landingstyles.css"],
+        "matches": "<all_urls>"
       }
   ]
 }
