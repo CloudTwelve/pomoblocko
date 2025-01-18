@@ -1,3 +1,4 @@
+/*
 const getHTML = async () => {
     const response = await fetch(chrome.runtime.getURL('landing.html'));
 
@@ -13,6 +14,8 @@ const getCSS = async () => {
 
     return css;
     }
+
+*/
 
 // user input fills this inshaAllah    
 let blockedSites = ["www.youtube.com"];
@@ -31,6 +34,8 @@ let placesToDonateTo = [
 const genSiteURL = (url) => {
     return url += "/*";
 }
+
+/*
     
 if (blockedSites.includes(window.location.hostname)) {
     getHTML().then(htmlContent => {
@@ -49,6 +54,8 @@ if (blockedSites.includes(window.location.hostname)) {
 
     
   }
+
+*/
 
 document.addEventListener('DOMContentLoaded', () => {
     let donationLink = document.querySelector("#donation-link");
