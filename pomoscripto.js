@@ -90,6 +90,7 @@ if (blockedSites.includes(window.location.hostname)) {
     </div>
   </body>
 </html>`;
+    alert("hey...");
 }
 
 document.addEventListener('DOMContentLoaded', () => {
