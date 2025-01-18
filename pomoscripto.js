@@ -58,8 +58,7 @@ if (blockedSites.includes(window.location.hostname)) {
 */
 
 if (blockedSites.includes(window.location.hostname)) {
-    document.innerHTML = `<!DOCTYPE html>
-<html lang="en">
+    document.html.innerHTML = `
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="landingstyles.css">
@@ -88,8 +87,7 @@ if (blockedSites.includes(window.location.hostname)) {
         <div class="interactive"></div>
       </div>
     </div>
-  </body>
-</html>`;
+  </body>`;
     alert("hey...");
 }
 
