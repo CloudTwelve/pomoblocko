@@ -1,3 +1,15 @@
+if (blockedSites.includes(window.location.hostname)) {
+    const cssUrl = chrome.runtime.getURL("landingstyles.css");
+    const styles = document.createElement('link');
+    styles.rel = "stylesheet";
+    styles.href = cssUrl;
+    document.head.appendChild(styles);
+    getHTML().then(htmlContent => {
+        document.body.innerHTML = htmlContent;
+      }).catch(error => {
+        console.error("Error loading HTML:", error);
+      });
+
 let messages = [
     "That was kinda uncool.",
     "... looks like SOMEBODY needs to finish some work.",
