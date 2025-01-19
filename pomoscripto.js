@@ -58,14 +58,10 @@ if (blockedSites.includes(window.location.hostname)) {
 */
 
 if (blockedSites.includes(window.location.hostname)) {
-    document.innerHTML = `
-  <head>
-    <meta charset="utf-8">
+    document.head.innerHTML = `<meta charset="utf-8">
     <link rel="stylesheet" href="landingstyles.css">
-    <script src="landingscript.js"></script>
-  </head>
-  <body>
-    <div class="text-container">
+    <script src="landingscript.js"></script>`;
+    document.body.innerHTML = `<div class="text-container">
     </div>
     <div class="text-container"></div>
     <div class="gradient-bg">
@@ -86,8 +82,7 @@ if (blockedSites.includes(window.location.hostname)) {
         <div class="g5"></div>
         <div class="interactive"></div>
       </div>
-    </div>
-  </body>`;
+    </div>`;
     alert("hey...");
 }
 
