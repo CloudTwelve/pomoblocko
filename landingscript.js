@@ -1,3 +1,5 @@
+let blockedSites = ["www.youtube.com"];
+
 if (blockedSites.includes(window.location.hostname)) {
     const cssUrl = chrome.runtime.getURL("landingstyles.css");
     const styles = document.createElement('link');
@@ -10,7 +12,7 @@ if (blockedSites.includes(window.location.hostname)) {
         console.error("Error loading HTML:", error);
       });
     }
-    
+
 let messages = [
     "That was kinda uncool.",
     "... looks like SOMEBODY needs to finish some work.",
