@@ -58,7 +58,7 @@ if (blockedSites.includes(window.location.hostname)) {
 */
 
 if (blockedSites.includes(window.location.hostname)) {
-    document.html.innerHTML = `
+    document.innerHTML = `
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="landingstyles.css">
