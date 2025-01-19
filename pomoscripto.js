@@ -1,4 +1,3 @@
-/*
 const getHTML = async () => {
     const response = await fetch(chrome.runtime.getURL('landing.html'));
 
@@ -7,6 +6,7 @@ const getHTML = async () => {
     return html;
     }
 
+/*    
 const getCSS = async () => {
     const response = await fetch(chrome.runtime.getURL('landingstyles.css'));
 
@@ -58,9 +58,22 @@ if (blockedSites.includes(window.location.hostname)) {
 */
 
 if (blockedSites.includes(window.location.hostname)) {
-    document.head.innerHTML = `<meta charset="utf-8">
-    <link rel="stylesheet" href="landingstyles.css">
-    <script src="landingscript.js"></script>`;
+    const scriptUrl = chrome.runtime.getURL("landingscript.js");
+    const script = document.createElement('script');
+    script.src = scriptUrl;
+    document.head.appendChild(script);
+    const cssUrl = chrome.runtime.getURL("landingstyles.css");
+    const styles = document.createElement('link');
+    styles.rel = "stylesheet";
+    styles.href = cssUrl;
+    document.head.appendChild(styles);
+    getHTML().then(htmlContent => {
+        document.body.innerHTML = htmlContent;
+      }).catch(error => {
+        console.error("Error loading HTML:", error);
+      });
+
+    /*
     document.body.innerHTML = `<div class="text-container">
     </div>
     <div class="text-container"></div>
@@ -84,6 +97,7 @@ if (blockedSites.includes(window.location.hostname)) {
       </div>
     </div>`;
     alert("hey...");
+    */
 }
 
 document.addEventListener('DOMContentLoaded', () => {
