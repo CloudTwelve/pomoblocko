@@ -9,7 +9,8 @@ if (blockedSites.includes(window.location.hostname)) {
       }).catch(error => {
         console.error("Error loading HTML:", error);
       });
-
+    }
+    
 let messages = [
     "That was kinda uncool.",
     "... looks like SOMEBODY needs to finish some work.",

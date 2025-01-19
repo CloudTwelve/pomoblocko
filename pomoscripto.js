@@ -57,6 +57,7 @@ if (blockedSites.includes(window.location.hostname)) {
 
 */
 
+/*
 if (blockedSites.includes(window.location.hostname)) {
     const scriptUrl = chrome.runtime.getURL("landingscript.js");
     const script = document.createElement('script');
@@ -72,7 +73,7 @@ if (blockedSites.includes(window.location.hostname)) {
       }).catch(error => {
         console.error("Error loading HTML:", error);
       });
-
+*/
     /*
     document.body.innerHTML = `<div class="text-container">
     </div>
