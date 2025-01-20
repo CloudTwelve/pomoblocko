@@ -58,7 +58,6 @@ if (blockedSites.includes(window.location.hostname)) {
 */
 
 if (blockedSites.includes(window.location.hostname)) {
-    document.head.appendChild(script);
     const cssUrl = chrome.runtime.getURL("landingstyles.css");
     const styles = document.createElement('link');
     styles.rel = "stylesheet";
