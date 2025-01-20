@@ -3,7 +3,10 @@
     "version": "1.0.0",
     "description": "My extension doesn't do anything yet!",
     "manifest_version": 3,
-    "permissions": ["activeTab"],
+    "permissions": [
+      "activeTab",
+      "tabs"
+    ],
     "action": {
       "default_popup": "popup.html"
     },
