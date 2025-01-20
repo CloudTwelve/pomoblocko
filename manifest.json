@@ -8,13 +8,9 @@
       "default_popup": "popup.html"
     },
     "content_scripts": [
-    /*{
-      "matches": ["<all_urls>"],
-      "js": ["pomoscripto.js"]
-    }, */
     {
       "matches": ["<all_urls>"],
-      "js": ["landingscript.js"]
+      "js": ["pomoscripto.js"]
     }
     ],
     "web_accessible_resources": [

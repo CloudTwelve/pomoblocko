@@ -57,11 +57,7 @@ if (blockedSites.includes(window.location.hostname)) {
 
 */
 
-/*
 if (blockedSites.includes(window.location.hostname)) {
-    const scriptUrl = chrome.runtime.getURL("landingscript.js");
-    const script = document.createElement('script');
-    script.src = scriptUrl;
     document.head.appendChild(script);
     const cssUrl = chrome.runtime.getURL("landingstyles.css");
     const styles = document.createElement('link');
@@ -73,33 +69,7 @@ if (blockedSites.includes(window.location.hostname)) {
       }).catch(error => {
         console.error("Error loading HTML:", error);
       });
-*/
-    /*
-    document.body.innerHTML = `<div class="text-container">
-    </div>
-    <div class="text-container"></div>
-    <div class="gradient-bg">
-      <svg xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
-            <feBlend in="SourceGraphic" in2="goo" />
-          </filter>
-        </defs>
-      </svg>
-      <div class="gradients-container">
-        <div class="g1"></div>
-        <div class="g2"></div>
-        <div class="g3"></div>
-        <div class="g4"></div>
-        <div class="g5"></div>
-        <div class="interactive"></div>
-      </div>
-    </div>`;
-    alert("hey...");
-    */
-}
+    }
 
 document.addEventListener('DOMContentLoaded', () => {
     let donationLink = document.querySelector("#donation-link");

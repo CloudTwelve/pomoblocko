@@ -1,3 +1,11 @@
+const getHTML = async () => {
+    const response = await fetch(chrome.runtime.getURL('landing.html'));
+
+    const html = await response.text();
+
+    return html;
+    }
+
 let blockedSites = ["www.youtube.com"];
 
 if (blockedSites.includes(window.location.hostname)) {
