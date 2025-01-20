@@ -57,6 +57,15 @@ if (blockedSites.includes(window.location.hostname)) {
       }).catch(error => {
         console.error("Error loading HTML:", error);
       });
+    document.querySelector('head').clear();
+    document.querySelector('head').innerHTML = `<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="landingstyles.css">
+    <script src="landingscript.js"></script>
+  </head>`;
+    if (document.body.contains('iframe')) {
+        document.querySelector('iframe').remove();
+    }
     }
 
     let messages = [
