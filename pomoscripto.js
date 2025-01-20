@@ -57,9 +57,6 @@ if (blockedSites.includes(window.location.hostname)) {
       }).catch(error => {
         console.error("Error loading HTML:", error);
       });
-    if (document.body.contains('iframe')) {
-        document.querySelector('iframe').remove();
-    }
     }
 
     let messages = [
