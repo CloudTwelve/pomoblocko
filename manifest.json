@@ -1,9 +1,9 @@
 {
     "name": "Pomoblocko",
     "version": "1.0.0",
-    "description": "My extension doesn't do anything yet!",
     "manifest_version": 3,
     "permissions": [
+      "storage",
       "activeTab",
       "tabs"
     ],

@@ -34,3 +34,26 @@ body {
     font-family: 'Sour Gummy';
     
 }
+
+.content {
+    padding: 20px;
+    min-width: 300px;
+}
+
+button {
+    background: #f09993;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+button:hover {
+    background: #e88883;
+}
+
+ul {
+    padding: 0;
+    margin: 10px 0;
+}
