@@ -2,14 +2,28 @@
     "name": "Pomoblocko",
     "version": "1.0.0",
     "description": "My extension doesn't do anything yet!",
-    "manifest_version": 2,
+    "manifest_version": 3,
+    "permissions": [
+      "activeTab",
+      "tabs"
+    ],
     "action": {
       "default_popup": "popup.html"
     },
     "content_scripts": [
     {
-      "matches": ["https://youtube.com/*"],
+      "matches": ["<all_urls>"],
       "js": ["pomoscripto.js"]
     }
-    ]
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": ["landing.html", "landingstyles.css", "landingscript.js"],
+        "matches": ["<all_urls>"]
+      }
+    ],
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self';"
+    }
+    
 }
