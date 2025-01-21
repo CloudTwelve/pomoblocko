@@ -18,7 +18,7 @@ const getCSS = async () => {
 */
 
 // user input fills this inshaAllah    
-let blockedSites = ["www.youtube.com"];
+let blockedSites = ["www.youtube.com", "www.google.com", "www.pcss.schoology.com"];
 
 const genSiteURL = (url) => {
     return url += "/*";
@@ -47,17 +47,19 @@ if (blockedSites.includes(window.location.hostname)) {
 */
 
 if (blockedSites.includes(window.location.hostname)) {
+    getHTML().then(htmlContent => {
+        document.body.innerHTML = htmlContent;
+      }).catch(error => {
+        console.error("Error loading HTML:", error);
+      });
     const cssUrl = chrome.runtime.getURL("landingstyles.css");
+    console.log(cssUrl);
     const styles = document.createElement('link');
     styles.rel = "stylesheet";
     styles.href = cssUrl;
     document.head.appendChild(styles);
-    getHTML().then(htmlContent => {
-        document.documentElement.innerHTML = htmlContent;
-      }).catch(error => {
-        console.error("Error loading HTML:", error);
-      });
-    }
+  }
+    alert("hi");
 
     let messages = [
         "That was kinda uncool.",
@@ -96,18 +98,10 @@ if (blockedSites.includes(window.location.hostname)) {
          move();
      });
     
-    document.addEventListener('DOMContentLoaded', () => {
-      let num = Math.floor(Math.random() * messages.length);
-      let messageHolder = document.querySelector(".text-container");
-      let message = document.createTextNode(messages[num]);
-      messageHolder.appendChild(message);
-    });
-
+    
 document.addEventListener('DOMContentLoaded', () => {
-    let donationLink = document.querySelector("#donation-link");
-    let num = Math.floor(Math.random() * placesToDonateTo.length);
-    donationLink.href = placesToDonateTo[num][0];
-    let messageHolder = document.querySelector(".donation");
-    let message = document.createTextNode(placesToDonateTo[num][1]);
+    let num = Math.floor(Math.random() * messages.length);
+    let messageHolder = document.querySelector(".text-container");
+    let message = document.createTextNode(messages[num]);
     messageHolder.appendChild(message);
-  });
+    });
