@@ -6,15 +6,34 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Sour+Gummy&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/dc2644d431.js" crossorigin="anonymous"></script>
+        <script src="popup.js" defer></script>
     </head>
     <body>
         <header>
             <h1 class="title">Pomoblocko</h1>
         </header>
         <div class="content">
-            <h2>Blocked Sites</h2>
-            <ul id="blocked-sites"></ul>
-            <button id="add-site">Add Site</button>
+            <h1 class="time">
+                <span class="minutes">25</span>:<span class="seconds">00</span>
+            </h1>
+            <div class="button-holder">
+                <button class="start-stop"></button>
+                <button class="reset"></button>
+            </div>
+        </div>
+        <button class="side-button" title="Settings" id="settings">
+            <i class="fas fa-cog" style="color:honeydew"></i>
+        </button>
+        <button class="side-button" id="">
+            <i class="fas fa-list-ol"></i>
+        </button>
+        <button class="side-button">
+            <i class="fas fa-list-ul"></i>
+        </button>
+        <button class="side-button">
+            <i class="fa-solid fa-link-slash"></i>
+        </button>
         </div>
         <footer>
             <div class="donation">Like this? Support <a href="https://github.com/sponsor" id="donation-link">the developer</a></div>
