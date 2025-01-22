@@ -22,20 +22,60 @@ const getHTML = async () => {
 const genSiteURL = (url) => {
     return url += "/*";
 }
+function injectContent() {
+  getHTML().then(htmlContent => {
+      // Insert HTML
+      document.body.innerHTML = htmlContent;
+
+      // Add CSS
+      const cssUrl = chrome.runtime.getURL("landingstyles.css");
+      const styles = document.createElement('link');
+      styles.rel = "stylesheet";
+      styles.href = cssUrl;
+      document.head.appendChild(styles);
+
+      // Wait for CSS to load
+      styles.onload = () => {
+          // Initialize bubble movement
+          const interBubble = document.querySelector('.interactive');
+          if (!interBubble) {
+              console.error('Interactive bubble not found');
+              return;
+          }
+
+          let curX = 0;
+          let curY = 0;
+          let tgX = 0;
+          let tgY = 0;
+
+          function move() {
+              curX += (tgX - curX) / 20;
+              curY += (tgY - curY) / 20;
+              interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+              requestAnimationFrame(move);
+          }
+
+          window.addEventListener('mousemove', (event) => {
+              tgX = event.clientX;
+              tgY = event.clientY;
+          });
+
+          // Add random message
+          const messageHolder = document.querySelector(".text-container");
+          if (messageHolder) {
+              let num = Math.floor(Math.random() * messages.length);
+              let message = document.createTextNode(messages[num]);
+              messageHolder.appendChild(message);
+          }
+
+          move();
+      };
+  }).catch(error => {
+      console.error('Error:', error);
+  });
+}
+
 
 if (blockedSites.includes(window.location.hostname)) {
-    document.querySelectorAll('iframe').forEach(iframe => iframe.remove());
-    getHTML().then(htmlContent => {
-        document.body.innerHTML = htmlContent;
-      }).catch(error => {
-        console.error("Error loading HTML:", error);
-      });
-    const cssUrl = chrome.runtime.getURL("landingstyles.css");
-    const styles = document.createElement('link');
-    styles.rel = "stylesheet";
-    styles.href = cssUrl;
-    document.head.appendChild(styles);
-    const scriptElement = document.createElement('script');
-    scriptElement.src = chrome.runtime.getURL('landingscript.js');
-    document.head.appendChild(scriptElement);
-}
+    injectContent();
+  }

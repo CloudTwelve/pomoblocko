@@ -17,6 +17,7 @@ html, body {
     flex-direction: row;
     flex-wrap: wrap;
     font-size: 96px;
+    font-weight: bold;
     color: white;
     opacity: 0.8;
     user-select: none;
