@@ -17,3 +17,9 @@ let placesToDonateTo = [
     ["https://www.launchgood.com/v4/campaign/fuel_your_health_building_a_free_clinic_in_uganda?src=", "a Ugandan Clinic"],
     ["https://www.launchgood.com/v4/campaign/palestine_mothers_and_babies?src=internal_discover", "Palestinian Mothers and Babies"]
 ]
+
+let seconds = 0;
+
+let beginButton = // something;
+
+document.addEventListener('click')
