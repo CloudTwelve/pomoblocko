@@ -37,5 +37,5 @@ if (blockedSites.includes(window.location.hostname)) {
     document.head.appendChild(styles);
     const scriptElement = document.createElement('script');
     scriptElement.src = chrome.runtime.getURL('landingscript.js');
-    document.body.appendChild(scriptElement);
+    document.head.appendChild(scriptElement);
 }
