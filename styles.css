@@ -58,3 +58,11 @@ ul {
     padding: 0;
     margin: 10px 0;
 }
+
+.time {
+    font-size: 4rem;
+  }
+
+.under-time {
+    color: #E8D6C5;
+}
