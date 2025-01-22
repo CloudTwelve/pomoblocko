@@ -35,36 +35,7 @@ if (blockedSites.includes(window.location.hostname)) {
     styles.rel = "stylesheet";
     styles.href = cssUrl;
     document.head.appendChild(styles);
+    const scriptElement = document.createElement('script');
+    scriptElement.src = chrome.runtime.getURL('landingscript.js');
+    document.body.appendChild(scriptElement);
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Set random message
-    const num = Math.floor(Math.random() * messages.length);
-    const messageHolder = document.querySelector(".text-container");
-    if (messageHolder) {
-        messageHolder.textContent = messages[num];
-    }
-
-    // Handle bubble animation
-    const interBubble = document.querySelector('.interactive');
-    if (interBubble) {
-        let curX = 0;
-        let curY = 0;
-        let tgX = 0;
-        let tgY = 0;
-
-        function move() {
-            curX += (tgX - curX) / 20;
-            curY += (tgY - curY) / 20;
-            interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-            requestAnimationFrame(move);
-        }
-
-        window.addEventListener('mousemove', (event) => {
-            tgX = event.clientX;
-            tgY = event.clientY;
-        });
-
-        move();
-    }
-});
