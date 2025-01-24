@@ -14,13 +14,13 @@ html {
 header {
     background-color: #f09993;
     display: flex;
+    padding: 15px;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     height: 200px;
-    max-height: 15vh;
-    min-height: 10vh;
+    max-height: 10vh;
     max-width: 100%;
 }
 
@@ -48,6 +48,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     margin: 10px 0;
+    width: 10%;
 }
 
 button:hover {
@@ -64,5 +65,14 @@ ul {
   }
 
 .under-time {
-    color: #E8D6C5;
+    color: black;
+    font-family: "Sour Gummy";
+    font-size: 200%;
+    height: 320%;
+}
+
+
+i {
+  color: black;
+  font-size: 1.5rem;
 }

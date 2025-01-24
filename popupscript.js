@@ -18,8 +18,24 @@ let placesToDonateTo = [
     ["https://www.launchgood.com/v4/campaign/palestine_mothers_and_babies?src=internal_discover", "Palestinian Mothers and Babies"]
 ]
 
+let sitelist = [];
+let blModeOn = true;
+let wlModeOn = false;
+
 let seconds = 0;
 
-let beginButton = // something;
+let beginButton = document.querySelector('#start-stop');
+let resetButton = document.querySelector('#reset');
 
-document.addEventListener('click')
+let settingsButton = document.querySelector('#settings');
+let todoButton = document.querySelector('#todo');
+let sitelistButton = document.querySelector('#sitelist');
+let bwToggle = document.querySelector('#bw-toggle');
+
+beginButton.addEventListener('click', () => {
+  
+});
+
+document.addEventListener('click', () => {
+
+});
