@@ -76,3 +76,14 @@ i {
   color: black;
   font-size: 1.5rem;
 }
+
+footer {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    background-color: #f09993;
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+}
