@@ -1,6 +1,22 @@
-const startTimer = () => {
+let breakTime = false;
 
+const startTimer = (time) => {
+  if (time.getTime() > Date.now()) {
+    setInterval(() => {
+
+    })
+  }
 };
+
+const startTime(time) {
+  if (breakTime) {
+    chrome.runtime.sendMessage({ cmd: 'START_BREAK_TIMER', when: time });
+    startTimer(time);
+  } else {
+    chrome.runtime.sendMessage({ cmd: 'START_TIMER', when: time });
+    startTimer(time);
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     let donationLink = document.querySelector("#donation-link");
@@ -37,13 +53,26 @@ let sitelistButton = document.querySelector('#sitelist');
 let bwToggle = document.querySelector('#bw-toggle');
 
 beginButton.addEventListener('click', () => {
-  
+  let buttonContent = beginButton.innerText;
+  if (buttonContent === "Start") {
+    startTime(time);
+  } else {
+    stopTime(time);
+  }
 });
+
 
 todoButton.addEventListener('click', () => {
 
 });
 sitelistButton.addEventListener('click'); //smth inshaAllah
+
+chrome.runtime.sendMessage({cmd: 'GET_TIME' }, (response) => {
+  if (response.time) {
+    const time = new Date(response.time);
+    startTimer(time);
+  }
+})
 
 /*
 background.js
