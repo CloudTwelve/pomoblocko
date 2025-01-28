@@ -1,3 +1,13 @@
+:root {
+    --color-bg1: rgb(2, 10, 0);
+    --color-bg2: rgb(0, 0, 0);
+    --color1: rgb(18, 113, 13);
+    --color2: rgb(180, 100, 100);
+    --color3: rgb(1, 220, 25);
+    --color4: rgb(200, 50, 50);
+    --color5: rgb(180, 10, 50);
+}
+
 * {
     font-family: 'Lato';
     text-align: center;
