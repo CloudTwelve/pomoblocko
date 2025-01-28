@@ -5,10 +5,9 @@ const startTimer = () => {
 document.addEventListener('DOMContentLoaded', () => {
     let donationLink = document.querySelector("#donation-link");
     let num = Math.floor(Math.random() * placesToDonateTo.length);
+    let message = placesToDonateTo[num][1];
+    donationLink.textContent = message;
     donationLink.href = placesToDonateTo[num][0];
-    let messageHolder = document.querySelector(".donation");
-    let message = document.createTextNode(placesToDonateTo[num][1]);
-    messageHolder.appendChild(message);
   });
 
 let placesToDonateTo = [
