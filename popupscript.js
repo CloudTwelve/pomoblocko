@@ -1,21 +1,30 @@
+let minutes = document.querySelector('.minutes');
+let seconds = document.querySelector('.seconds');
+
 let breakTime = false;
 
 const startTimer = (time) => {
   if (time.getTime() > Date.now()) {
     setInterval(() => {
-
+      let timeSecs = time.getTime() / 1000;
+      minutes.textContent = Math.floor(timeSecs / 60);
+      seconds.textcontent = timeSecs % 60;
     })
   }
 };
 
-const startTime(time) {
+const startTime = (time) => {
   if (breakTime) {
-    chrome.runtime.sendMessage({ cmd: 'START_BREAK_TIMER', when: time });
-    startTimer(time);
+    chrome.runtime.sendMessage({ cmd: 'START_BREAK_TIMER', when: time }, (response) => {
+      chrome.runtime.sendMessage({ breakTime: response.breakTime });
+    });
   } else {
-    chrome.runtime.sendMessage({ cmd: 'START_TIMER', when: time });
-    startTimer(time);
+    chrome.runtime.sendMessage({ cmd: 'START_TIMER', when: time }, (response) => {
+      breakTime = true;
+      startTime(time);
+    });
   }
+  startTimer(time);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,8 +50,6 @@ let sitelist = [];
 let blModeOn = true;
 let wlModeOn = false;
 
-let seconds = 0;
-
 let beginButton = document.querySelector('#start-stop');
 let resetButton = document.querySelector('#reset');
 
@@ -61,6 +68,7 @@ beginButton.addEventListener('click', () => {
 });
 
 
+
 todoButton.addEventListener('click', () => {
 
 });
@@ -71,7 +79,9 @@ chrome.runtime.sendMessage({cmd: 'GET_TIME' }, (response) => {
     const time = new Date(response.time);
     startTimer(time);
   }
-})
+});
+
+
 
 /*
 background.js

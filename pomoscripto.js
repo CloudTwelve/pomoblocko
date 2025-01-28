@@ -11,6 +11,8 @@ const messages = [
     "what's up? your work ethic should be."
 ];
 
+let breakTime = false;
+
 let blockedSites = ["www.youtube.com", "www.google.com", "www.pcss.schoology.com"];
 
 const getHTML = async () => {
@@ -76,6 +78,10 @@ function injectContent() {
 }
 
 
-if (blockedSites.includes(window.location.hostname)) {
+if (blockedSites.includes(window.location.hostname) && !breakTime) {
     injectContent();
   }
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.)
+})
