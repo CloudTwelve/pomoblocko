@@ -50,6 +50,12 @@ button {
     margin: 10px 0;
 }
 
+.bw {
+    background: black;
+    color: white;
+    border-radius: 50%;
+}
+
 button:hover {
     background: #e88883;
 }
@@ -67,7 +73,7 @@ button:hover {
     margin: 0 auto;  
 }
 
-.todo-item {
+.item {
     display: block;
     padding: 3px;
     background-color: #E8D6C5;
@@ -75,6 +81,22 @@ button:hover {
     margin: 5px 0;
 }
 
+.todo-container {
+    display: block;
+    padding: 3px;
+}
+
+.close {
+    color: black;
+    background-color: #E8D6C5;
+    border-radius: 3px;
+    margin: 1px;
+}
+
+.header {
+    display: block;
+    align-self: right;
+}
 
 ul {
     padding: 0;

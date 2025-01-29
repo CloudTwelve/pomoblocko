@@ -1,4 +1,41 @@
+let sitelistButton = document.querySelector("#sitelist");
+let addSiteButton = document.querySelector("#add-site");
+let siteX = document.querySelector("#site-x");
+let updateSites = () => {
+  let sites = document.querySelectorAll(".todo-item");
+  let siteArray = [];
+  sites.forEach((site) => {
+    sites.push(site.innerText);
+  });
+  localStorage.setItem("sites", JSON.stringify(siteArray));
+}
+
 let todoButton = document.querySelector("#todo");
+let addTodoButton = document.querySelector("#add-todo");
+let todoX = document.querySelector("#todo-x");
+let updateTodos = () => {
+  let todos = document.querySelectorAll(".todo-item");
+  let todoArray = [];
+  todos.forEach((todo) => {
+    todoArray.push(todo.innerText);
+  });
+  localStorage.setItem("todos", JSON.stringify(todoArray));
+}
+
+let bwListButton = document.querySelector("#bwlist");
+let bwListMode = "blacklist";
+
+if (localStorage.getItem("todos") === null) {
+  localStorage.setItem("todos", []);
+}
+
+if (localStorage.getItem("sites") === null) {
+  localStorage.setItem("sites", []);
+}
+
+if (localStorage.getItem("bwlist-mode") === null) {
+  localStorage.setItem("bwlist-mode", "blacklist");
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     let donationLink = document.querySelector("#donation-link");
@@ -20,9 +57,8 @@ let placesToDonateTo = [
     ["https://www.launchgood.com/v4/campaign/palestine_mothers_and_babies?src=internal_discover", "Palestinian Mothers and Babies"]
 ]
 
-let seconds = 0;
 
-let beginButton = ;
+// let beginButton = ;
 
 let displayLightbox = (id) => {
   let lightbox = document.querySelector(id);
@@ -37,12 +73,54 @@ let hideLightbox = (id) => {
 
 // localStorage.setItem('myData', JSON.stringify({ name: 'John', age: 30 }));
 
-/*
+
 
 todoButton.addEventListener('click', () => {
+  displayLightbox("#todo-lightbox");
+});
 
-  })
+addTodoButton.addEventListener('click', () => {
+  let todoInput = document.querySelector("#todo-input");
+  let todoList = document.querySelector(".todo-container");
+  let todo = todoInput.value;
+  let newTodoElement = document.createElement("div");
+  newTodoElement.classList.add("item");
+  let newTodoText = document.createTextNode(todo);
+  newTodoElement.appendChild(newTodoText);
+  todoList.appendChild(newTodoElement);
+  updateTodos();
+})
 
-*/
+todoX.addEventListener('click', () => {
+  hideLightbox("#todo-lightbox");
+});
 
-document.addEventListener('click')
+sitelistButton.addEventListener('click', () => {
+  displayLightbox("#todo-lightbox");
+});
+
+addSiteButton.addEventListener('click', () => {
+  let siteInput = document.querySelector("#site-input");
+  let siteList = document.querySelector(".site-container");
+  let site = siteInput.value;
+  let newSiteElement = document.createElement("div");
+  newSiteElement.classList.add("item");
+  let newSiteText = document.createTextNode(site);
+  newSiteElement.appendChild(newSiteText);
+  siteList.appendChild(newSiteElement);
+  updateSites();
+})
+
+siteX.addEventListener('click', () => {
+  hideLightbox("#site-lightbox");
+});
+
+bwListButton.addEventListener('click', () => {
+  if (bwListMode === "blacklist") {
+    bwListMode = "whitelist";
+    localStorage.setItem("bwlist-mode", "whitelist");
+  } else {
+    bwListMode = "blacklist";
+    localStorage.setItem("bwlist-mode", "whitelist");
+  }
+});
