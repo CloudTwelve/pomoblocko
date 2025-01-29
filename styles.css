@@ -54,6 +54,28 @@ button:hover {
     background: #e88883;
 }
 
+.modal {
+    display: none;
+    background-color: #e88883; 
+}
+
+.modal-content {
+    background-color: #f09993;
+    padding: 20px;
+    border-radius: 4px;
+    width: 70%;
+    margin: 0 auto;  
+}
+
+.todo-item {
+    display: block;
+    padding: 3px;
+    background-color: #E8D6C5;
+    border-radius: 3px;
+    margin: 5px 0;
+}
+
+
 ul {
     padding: 0;
     margin: 10px 0;

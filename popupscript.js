@@ -1,3 +1,5 @@
+let todoButton = document.querySelector("#todo");
+
 document.addEventListener('DOMContentLoaded', () => {
     let donationLink = document.querySelector("#donation-link");
     let num = Math.floor(Math.random() * placesToDonateTo.length);
@@ -20,6 +22,27 @@ let placesToDonateTo = [
 
 let seconds = 0;
 
-let beginButton = // something;
+let beginButton = ;
+
+let displayLightbox = (id) => {
+  let lightbox = document.querySelector(id);
+  lightbox.style.display = "block";
+}
+
+let hideLightbox = (id) => {
+  let lightbox = document.querySelector(id);
+  lightbox.style.display = "none";
+}
+
+
+// localStorage.setItem('myData', JSON.stringify({ name: 'John', age: 30 }));
+
+/*
+
+todoButton.addEventListener('click', () => {
+
+  })
+
+*/
 
 document.addEventListener('click')
