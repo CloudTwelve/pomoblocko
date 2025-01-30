@@ -29,12 +29,13 @@ header {
     align-items: center;
     position: sticky;
     top: 0;
-    height: 200px;
+    height: 25px;
     max-height: 10vh;
     max-width: 100%;
 }
 
 body {
+    min-height: 340px;
     height: 100%;
     width: 100%;
     margin: 0;
@@ -47,23 +48,29 @@ body {
 }
 
 .content {
-    padding: 20px;
+    padding: 10px;
     min-width: 300px;
+    margin: 0;
 }
 
 button {
     background: #f09993;
     border: none;
-    padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
-    margin: 10px 0;
-    width: 10%;
+    margin: 10px;
+    min-width: 50px;
+    min-height: 30px;
+    max-width: 20%;
+}
+
+.button-holder {
+    display: flex;
+    justify-content: center;
 }
 
 .bw {
-    background: black;
-    color: white;
+    background-color: black;
     border-radius: 50%;
 }
 
@@ -73,6 +80,14 @@ button:hover {
 
 .modal {
     display: none;
+    position: fixed;
+    z-index: 1;
+    padding: 10px 62px 0px 62px;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
     background-color: #e88883; 
 }
 
@@ -80,8 +95,8 @@ button:hover {
     background-color: #f09993;
     padding: 20px;
     border-radius: 4px;
-    width: 70%;
-    margin: 0 auto;  
+    width: 80%;
+    margin: auto;  
 }
 
 .item {
@@ -105,8 +120,8 @@ button:hover {
 }
 
 .header {
-    display: block;
-    align-self: right;
+    display: flex;
+    justify-content: right;
 }
 
 ul {
@@ -114,17 +129,36 @@ ul {
     margin: 10px 0;
 }
 
+#bw-toggle {
+    background-color: black;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    aspect-ratio: 1;
+}
+
+.fa-link-slash {
+    color: white;
+}
+
 .time {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
 .under-time {
     color: black;
     font-family: "Sour Gummy";
-    font-size: 200%;
-    height: 320%;
+    font-size: 150%;
 }
 
+input {
+    background-color: #E8D6C5;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
 
 i {
   color: black;
@@ -132,12 +166,26 @@ i {
 }
 
 footer {
-    position: absolute;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
+    background-color: #f09993;
+    padding: 10px;
+    z-index: 1000;
+}
+
+/*
+footer {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
     bottom: 0;
     background-color: #f09993;
     width: 100%;
     margin: auto;
     padding: 10px;
 }
+    */

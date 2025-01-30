@@ -83,5 +83,13 @@ if (blockedSites.includes(window.location.hostname) && !breakTime) {
   }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.)
-})
+    if (request.cmd === 'UPDATE_BREAK_STATUS') {
+        breakTime = request.breakTime;
+        if (blockedSites.includes(window.location.hostname) && !breakTime) {
+            injectContent();
+        } else {
+            location.reload();
+        }
+        sendResponse({ status: "Break status updated" });
+    }
+});

@@ -6,7 +6,8 @@
       "storage",
       "activeTab",
       "tabs",
-      "nativeMessaging"
+      "nativeMessaging",
+      "alarms"
     ],
     "action": {
       "default_popup": "popup.html"
@@ -18,17 +19,12 @@
     }
     ],
     "background": {
-      "scripts": "background.js",
-      "persistent": true
+      "service_worker": "background.js"
     },
     "web_accessible_resources": [
       {
         "resources": ["landing.html", "landingstyles.css", "landingscript.js"],
         "matches": ["<all_urls>"]
       }
-    ],
-    "content_security_policy": {
-      "extension_pages": "script-src 'self'; object-src 'self';"
-    }
-    
+    ] 
 }

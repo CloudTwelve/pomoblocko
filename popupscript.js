@@ -4,12 +4,18 @@ let timerID;
 
 let breakTime = false;
 
+if (!localStorage.getItem("timerTime")) {
+  localStorage.setItem("timerTime", 25*60*1000);
+}
+
 const startTimer = (time) => {
   if (time.getTime() > Date.now()) {
     timerID = setInterval(() => {
-      let timeSecs = time.getTime() / 1000;
+      let timeDiff = time.getTime() - Date.now();
+      let timeSecs = Math.floor(timeDiff / 1000);
       minutes.textContent = Math.floor(timeSecs / 60);
-      seconds.textcontent = timeSecs % 60;
+      seconds.textContent = timeSecs % 60;
+      localStorage.setItem("currentTime", timeDiff);
     }, 1000);
   }
 };
@@ -17,12 +23,11 @@ const startTimer = (time) => {
 const startTime = (time) => {
   if (breakTime) {
     chrome.runtime.sendMessage({ cmd: 'START_BREAK_TIMER', when: time }, (response) => {
-      chrome.runtime.sendMessage({ breakTime: response.breakTime });
+      chrome.runtime.sendMessage({ cmd: 'UPDATE_BREAK_STATUS', breakTime: true });
     });
   } else {
     chrome.runtime.sendMessage({ cmd: 'START_TIMER', when: time }, (response) => {
-      breakTime = true;
-      startTime(time);
+      chrome.runtime.sendMessage({ cmd: 'UPDATE_BREAK_STATUS', breakTime: false });
     });
   }
   startTimer(time);
@@ -42,18 +47,27 @@ let resetButton = document.querySelector('#reset');
 beginButton.addEventListener('click', () => {
   let buttonContent = beginButton.innerText;
   if (buttonContent === "Start") {
+    if (localStorage.getItem("currentTime")) {
+      let time = new Date(Date.now() + localStorage.getItem("currentTime"));
+      startTime(time);
+    } else {
+      localStorage.setItem("currentTime", 25*60*1000);
+    }
+    let time = new Date(Date.now() + 25 * 60 * 1000); // 25 minutes from now
     startTime(time);
-    buttonContent = "Stop";
+    beginButton.innerText = "Stop";
   } else {
-    stopTime(time);
-    buttonContent = "Start";
+    clearInterval(timerID);
+    beginButton.innerText = "Start";
   }
 });
 
 resetButton.addEventListener('click', () => {
   chrome.runtime.sendMessage({ cmd: 'RESET_TIMER' });
+  clearInterval(timerID);
+  minutes.textContent = "25";
+  seconds.textContent = "00";
 });
-
 
 // This section has the button actions for the sitelist,
 // todolist, and bwlist toggle buttons.
@@ -61,7 +75,7 @@ resetButton.addEventListener('click', () => {
 // sitelist stuff
 let sitelistButton = document.querySelector("#sitelist");
 let addSiteButton = document.querySelector("#add-site");
-let siteX = document.querySelector("#site-x");
+let siteX = document.querySelector("#sitelist-x");
 let updateSites = () => {
   let sites = document.querySelectorAll(".todo-item");
   let siteArray = [];
@@ -161,13 +175,6 @@ let hideLightbox = (id) => {
   lightbox.style.display = "none";
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  let donationLink = document.querySelector("#donation-link");
-  let num = Math.floor(Math.random() * placesToDonateTo.length);
-  let message = placesToDonateTo[num][1];
-  donationLink.textContent = message;
-  donationLink.href = placesToDonateTo[num][0];
-});
 
 let placesToDonateTo = [
   ["https://irusa.org/middle-east/palestine/", "Palestine"],
@@ -178,7 +185,15 @@ let placesToDonateTo = [
   ["https://www.launchgood.com/v4/campaign/los_angeles_wildfires_emergency_2025?src=internal_comm_page", "Los Angeles Wildfire Relief"],
   ["https://www.launchgood.com/v4/campaign/fuel_your_health_building_a_free_clinic_in_uganda?src=", "a Ugandan Clinic"],
   ["https://www.launchgood.com/v4/campaign/palestine_mothers_and_babies?src=internal_discover", "Palestinian Mothers and Babies"]
-]
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  let donationLink = document.querySelector("#donation-link");
+  let num = Math.floor(Math.random() * placesToDonateTo.length);
+  let message = placesToDonateTo[num][1];
+  donationLink.textContent = message;
+  donationLink.href = placesToDonateTo[num][0];
+});
 
 /*
 

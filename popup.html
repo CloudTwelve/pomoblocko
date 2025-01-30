@@ -6,8 +6,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Sour+Gummy&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/dc2644d431.js" crossorigin="anonymous"></script>
-        <script src="popup.js" defer></script>
+        <link rel="stylesheet" href="icons/css/all.min.css">
+        <script src="popupscript.js" defer></script>
     </head>
     <body>
         <header>
@@ -18,23 +18,24 @@
                 <button class="close" id="sitelist-x">X</button>
             </div>
             <div class="modal-content">
-                <div class="header">
-                    <button class="close" id="site-x">X</button>
-                </div>
-                <div class="modal-content">
-                    <div class="site-container"></div>
-                    <div>
-                        <input type="text" id="site-input" placeholder="Add a site (format www.example.com)">
-                        <button id="add-site">Add</button>
-                    </div>
+                <div class="site-container"></div>
+                <div>
+                    <input type="text" id="site-input" placeholder="Add a site (format www.example.com)">
+                    <button id="add-site">Add</button>
                 </div>
             </div>
         </div>
-        <div id="toggle-bwlist-lightbox" class="modal">
+        <div id="todo-lightbox" class="modal">
             <div class="header">
-                <button class="close" id="bw-x">X</button>
+                <button class="close" id="todo-x">X</button>
             </div>
-            <div class="modal-content"></div>
+            <div class="modal-content">
+                <div class="todo-container"></div>
+                <div>
+                    <input type="text" id="todo-input" placeholder="Add a site (format www.example.com)">
+                    <button id="add-todo">Add</button>
+                </div>
+            </div>
         </div>
         <div class="content">
             <h1 class="time">
@@ -45,18 +46,20 @@
                 <button class="under-time" id="reset">Reset</button>
             </div>
         </div>
-        <button class="side-button" title="Settings" id="settings">
-            <i class="fas fa-cog" style="color:honeydew"></i>
-        </button>
-        <button class="side-button" title="Tasks" id="todo">
-            <i class="fas fa-list-ol"></i>
-        </button>
-        <button class="side-button" title="Sitelist" id="sitelist">
-            <i class="fas fa-list-ul"></i>
-        </button>
-        <button class="side-button" title="Black/Whitelist Mode Toggle" id="bw-toggle">
-            <i class="fa-solid fa-link-slash"></i>
-        </button>
+        <div class="button-holder">
+            <button class="side-button" title="Settings" id="settings">
+                <i class="fas fa-cog"></i>
+            </button>
+            <button class="side-button" title="Tasks" id="todo">
+                <i class="fas fa-list-ol"></i>
+            </button>
+            <button class="side-button" title="Sitelist" id="sitelist">
+                <i class="fas fa-list-ul"></i>
+            </button>
+            <button class="side-button" title="Black/Whitelist Mode Toggle" id="bw-toggle">
+                <i class="fa-solid fa-link-slash"></i>
+            </button>
+        </div>
         </div>
         <footer>
             <div class="donation">Like this? Support <a id="donation-link" target="_blank"></a></div>
