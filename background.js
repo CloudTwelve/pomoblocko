@@ -1,5 +1,6 @@
 let seconds = 0;
 let minutes = 0;
+let timerID;
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.cmd === 'START_BREAK_TIMER') {
@@ -7,6 +8,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         let timeDiff = timerTime.getTime() - Date.now();
 
         chrome.alarms.create("breakTimer", { delayInMinutes: timeDiff / 60000 });
+        chrome.storage.local.set({ timerTime: timerTime.getTime(), breakTime: true });
 
         sendResponse({ status: "Break timer started" });
 
@@ -15,16 +17,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         let timeDiff = timerTime.getTime() - Date.now();
 
         chrome.alarms.create("workTimer", { delayInMinutes: timeDiff / 60000 });
+        chrome.storage.local.set({ timerTime: timerTime.getTime(), breakTime: false });
 
         sendResponse({ status: "Work timer started" });
 
     } else if (request.cmd === 'GET_TIME') {
-        chrome.storage.local.get("timerTime", (data) => {
-            sendResponse({ time: data.timerTime });
+        chrome.storage.local.get(["timerTime", "breakTime"], (data) => {
+            sendResponse({ time: data.timerTime, breakTime: data.breakTime });
         });
         return true; 
     } else if (request.cmd === 'RESET_TIMER') {
-        chrome.storage.local.set({ timerTime: 25 * 60 * 1000 });
+        chrome.alarms.clearAll();
+        chrome.storage.local.set({ timerTime: null, breakTime: false });
+        sendResponse({ status: "Timer reset" });
     }
 });
 

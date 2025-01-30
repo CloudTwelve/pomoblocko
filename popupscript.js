@@ -4,10 +4,6 @@ let timerID;
 
 let breakTime = false;
 
-if (!localStorage.getItem("timerTime")) {
-  localStorage.setItem("timerTime", 25*60*1000);
-}
-
 const startTimer = (time) => {
   if (time.getTime() > Date.now()) {
     timerID = setInterval(() => {
@@ -15,7 +11,7 @@ const startTimer = (time) => {
       let timeSecs = Math.floor(timeDiff / 1000);
       minutes.textContent = Math.floor(timeSecs / 60);
       seconds.textContent = timeSecs % 60;
-      localStorage.setItem("currentTime", timeDiff);
+      chrome.storage.local.set({ currentTime: timeDiff });
     }, 1000);
   }
 };
@@ -33,10 +29,11 @@ const startTime = (time) => {
   startTimer(time);
 }
 
-chrome.runtime.sendMessage({cmd: 'GET_TIME' }, (response) => {
+chrome.runtime.sendMessage({ cmd: 'GET_TIME' }, (response) => {
   if (response.time) {
     const time = new Date(response.time);
     startTimer(time);
+    breakTime = response.breakTime;
   }
 });
 
@@ -47,12 +44,6 @@ let resetButton = document.querySelector('#reset');
 beginButton.addEventListener('click', () => {
   let buttonContent = beginButton.innerText;
   if (buttonContent === "Start") {
-    if (localStorage.getItem("currentTime")) {
-      let time = new Date(Date.now() + localStorage.getItem("currentTime"));
-      startTime(time);
-    } else {
-      localStorage.setItem("currentTime", 25*60*1000);
-    }
     let time = new Date(Date.now() + 25 * 60 * 1000); // 25 minutes from now
     startTime(time);
     beginButton.innerText = "Stop";
