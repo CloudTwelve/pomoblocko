@@ -12,8 +12,14 @@ const messages = [
 ];
 
 let breakTime = false;
+let sites;
 
-let blockedSites = ["www.youtube.com", "www.google.com", "www.pcss.schoology.com"];
+if (chrome.storage.local.get("sites"))
+{
+    sites = chrome.storage.local.get("sites");
+} else {
+    sites = [];
+}
 
 const getHTML = async () => {
     const response = await fetch(chrome.runtime.getURL('landing.html'));
@@ -77,10 +83,24 @@ function injectContent() {
   });
 }
 
-
-if (blockedSites.includes(window.location.hostname) && !breakTime) {
-    injectContent();
-  }
+if (!chrome.storage.local.get("breakTime")) {
+    if (chrome.storage.local.get("bwlist-mode") === "blacklist") {
+        chrome.storage.local.get("sites", (result) => {
+            sites = result.sites.map(genSiteURL);
+        });
+        if (sites.includes(window.location.hostname)) {
+            injectContent();
+        }
+    }
+    if (chrome.storage.local.get("bwlist-mode") === "whitelist") {
+        chrome.storage.local.get("sites", (result) => {
+            let sites = result.sites.map(genSiteURL);
+            sites = sites;
+        });
+        if (!sites.includes(window.location.hostname)) {
+            injectContent();
+    }
+}
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.cmd === 'UPDATE_BREAK_STATUS') {

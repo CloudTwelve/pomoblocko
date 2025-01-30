@@ -4,6 +4,10 @@ let timerID;
 
 let breakTime = false;
 
+if (!chrome.storage.local.get("currentTime")) {
+  chrome.storage.local.set({ currentTime: 25 * 60 * 1000 });
+}
+
 const startTimer = (time) => {
   if (time.getTime() > Date.now()) {
     timerID = setInterval(() => {
@@ -44,7 +48,7 @@ let resetButton = document.querySelector('#reset');
 beginButton.addEventListener('click', () => {
   let buttonContent = beginButton.innerText;
   if (buttonContent === "Start") {
-    let time = new Date(Date.now() + 25 * 60 * 1000); // 25 minutes from now
+    let time = new Date(Date.now() + chrome.storage.local.get("currentTime"));
     startTime(time);
     beginButton.innerText = "Stop";
   } else {
@@ -73,7 +77,7 @@ let updateSites = () => {
   sites.forEach((site) => {
     sites.push(site.innerText);
   });
-  localStorage.setItem("sites", JSON.stringify(siteArray));
+  chrome.storage.local.setItem("sites", JSON.stringify(siteArray));
 }
 
 sitelistButton.addEventListener('click', () => {
@@ -106,7 +110,7 @@ let updateTodos = () => {
   todos.forEach((todo) => {
     todoArray.push(todo.innerText);
   });
-  localStorage.setItem("todos", JSON.stringify(todoArray));
+  chrome.storage.local.setItem("todos", JSON.stringify(todoArray));
 }
 
 todoButton.addEventListener('click', () => {
@@ -133,25 +137,25 @@ todoX.addEventListener('click', () => {
 let bwListButton = document.querySelector("#bw-toggle");
 let bwListMode = "blacklist";
 
-if (localStorage.getItem("todos") === null) {
-  localStorage.setItem("todos", []);
+if (chrome.storage.local.getItem("todos") === null) {
+  chrome.storage.local.setItem("todos", []);
 }
 
-if (localStorage.getItem("sites") === null) {
-  localStorage.setItem("sites", []);
+if (chrome.storage.local.getItem("sites") === null) {
+  chrome.storage.local.setItem("sites", []);
 }
 
-if (localStorage.getItem("bwlist-mode") === null) {
-  localStorage.setItem("bwlist-mode", "blacklist");
+if (chrome.storage.local.getItem("bwlist-mode") === null) {
+  chrome.storage.local.setItem("bwlist-mode", "blacklist");
 }
 
 bwListButton.addEventListener('click', () => {
   if (bwListMode === "blacklist") {
     bwListMode = "whitelist";
-    localStorage.setItem("bwlist-mode", "whitelist");
+    chrome.storage.local.setItem("bwlist-mode", "whitelist");
   } else {
     bwListMode = "blacklist";
-    localStorage.setItem("bwlist-mode", "whitelist");
+    chrome.storage.local.setItem("bwlist-mode", "whitelist");
   }
 });
 

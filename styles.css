@@ -82,7 +82,7 @@ button:hover {
     display: none;
     position: fixed;
     z-index: 1;
-    padding: 10px 62px 0px 62px;
+    padding: 0;
     left: 0;
     top: 0;
     width: 100vw;
@@ -121,7 +121,7 @@ button:hover {
 
 .header {
     display: flex;
-    justify-content: right;
+    justify-content: left;
 }
 
 ul {
