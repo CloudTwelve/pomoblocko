@@ -101,15 +101,17 @@ if (!chrome.storage.local.get("breakTime")) {
             injectContent();
     }
 }
+}
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.cmd === 'UPDATE_BREAK_STATUS') {
+    if (request.cmd === 'UPDATE_BREAK_STATUS_CONT') {
         breakTime = request.breakTime;
         if (blockedSites.includes(window.location.hostname) && !breakTime) {
             injectContent();
         } else {
             location.reload();
-        }
+        }        
         sendResponse({ status: "Break status updated" });
     }
+    sendResponse({ status: "Break status updated" });
 });
