@@ -33,15 +33,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
-/*
 
 chrome.alarms.onAlarm.addListener((alarm) => {
     if (alarm.name === "breakTimer") {
         chrome.storage.local.set({ breakTime: false });
-        chrome.runtime.sendMessage({ cmd: 'UPDATE_BREAK_STATUS_CONT', breakTime: false });
     } else if (alarm.name === "workTimer") {
         chrome.storage.local.set({ breakTime: true });
-        chrome.runtime.sendMessage({ cmd: 'UPDATE_BREAK_STATUS_CONT', breakTime: true });
     }
 });
-*/
+
