@@ -18,6 +18,7 @@ const startTimer = (time) => {
       chrome.storage.local.set({ currentTime: timeDiff });
     }, 1000);
   }
+  console.log("Timer started");
 };
 
 const startTime = (time) => {
