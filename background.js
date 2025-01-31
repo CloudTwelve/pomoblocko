@@ -24,7 +24,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else if (request.cmd === 'GET_TIME') {
         chrome.storage.local.get(["timerTime", "breakTime"], (data) => {
             sendResponse({ time: data.timerTime, breakTime: data.breakTime });
-        });
+        }); // OK OK OK THIS IS IMPORTANT inshaAllah
         return true; 
     } else if (request.cmd === 'RESET_TIMER') {
         chrome.alarms.clearAll();
@@ -36,9 +36,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 chrome.alarms.onAlarm.addListener((alarm) => {
     if (alarm.name === "breakTimer") {
         chrome.storage.local.set({ breakTime: false });
-        chrome.runtime.sendMessage({ cmd: 'UPDATE_BREAK_STATUS', breakTime: false });
+        chrome.runtime.sendMessage({ cmd: 'UPDATE_BREAK_STATUS_CONT', breakTime: false });
     } else if (alarm.name === "workTimer") {
         chrome.storage.local.set({ breakTime: true });
-        chrome.runtime.sendMessage({ cmd: 'UPDATE_BREAK_STATUS', breakTime: true });
+        chrome.runtime.sendMessage({ cmd: 'UPDATE_BREAK_STATUS_CONT', breakTime: true });
     }
 });

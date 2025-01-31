@@ -23,11 +23,11 @@ const startTimer = (time) => {
 const startTime = (time) => {
   if (breakTime) {
     chrome.runtime.sendMessage({ cmd: 'START_BREAK_TIMER', when: time }, (response) => {
-      chrome.runtime.sendMessage({ cmd: 'UPDATE_BREAK_STATUS', breakTime: true });
+      console.log(response);
     });
   } else {
     chrome.runtime.sendMessage({ cmd: 'START_TIMER', when: time }, (response) => {
-      chrome.runtime.sendMessage({ cmd: 'UPDATE_BREAK_STATUS', breakTime: false });
+      startTime(time);
     });
   }
   startTimer(time);
@@ -77,7 +77,7 @@ let updateSites = () => {
   sites.forEach((site) => {
     sites.push(site.innerText);
   });
-  chrome.storage.local.setItem("sites", JSON.stringify(siteArray));
+  chrome.storage.local.set("sites", JSON.stringify(siteArray));
 }
 
 sitelistButton.addEventListener('click', () => {
@@ -110,7 +110,7 @@ let updateTodos = () => {
   todos.forEach((todo) => {
     todoArray.push(todo.innerText);
   });
-  chrome.storage.local.setItem("todos", JSON.stringify(todoArray));
+  chrome.storage.local.set("todos", JSON.stringify(todoArray));
 }
 
 todoButton.addEventListener('click', () => {
@@ -137,25 +137,25 @@ todoX.addEventListener('click', () => {
 let bwListButton = document.querySelector("#bw-toggle");
 let bwListMode = "blacklist";
 
-if (chrome.storage.local.getItem("todos") === null) {
-  chrome.storage.local.setItem("todos", []);
+if (chrome.storage.local.get("todos") === null) {
+  chrome.storage.local.set("todos", []);
 }
 
-if (chrome.storage.local.getItem("sites") === null) {
-  chrome.storage.local.setItem("sites", []);
+if (chrome.storage.local.get("sites") === null) {
+  chrome.storage.local.set("sites", []);
 }
 
-if (chrome.storage.local.getItem("bwlist-mode") === null) {
-  chrome.storage.local.setItem("bwlist-mode", "blacklist");
+if (chrome.storage.local.get("bwlist-mode") === null) {
+  chrome.storage.local.set("bwlist-mode", "blacklist");
 }
 
 bwListButton.addEventListener('click', () => {
   if (bwListMode === "blacklist") {
     bwListMode = "whitelist";
-    chrome.storage.local.setItem("bwlist-mode", "whitelist");
+    chrome.storage.local.set("bwlist-mode", "whitelist");
   } else {
     bwListMode = "blacklist";
-    chrome.storage.local.setItem("bwlist-mode", "whitelist");
+    chrome.storage.local.set("bwlist-mode", "whitelist");
   }
 });
 
