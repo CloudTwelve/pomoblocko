@@ -12,14 +12,33 @@ const messages = [
 ];
 
 let breakTime = false;
-let sites;
+let sites = [];
 
-if (chrome.storage.local.get("sites"))
-{
-    sites = chrome.storage.local.get("sites");
-} else {
-    sites = [];
-}
+chrome.storage.local.get(["breakTime", "bwlistmode", "sites", "timerRunning"], (result) => {
+    console.log("Checking site blocking for:", window.location.hostname);
+    console.log("Current state:", result);
+
+    if (!result.breakTime && result.timerRunning) {
+        let mode = result.bwlistmode || "blacklist";
+        sites = result.sites || [];
+        
+        // Clean up the hostname comparison
+        let currentHost = window.location.hostname.replace('www.', '');
+        let shouldBlock = false;
+
+        // Check if site should be blocked based on mode
+        if (mode === "blacklist") {
+            shouldBlock = sites.some(site => currentHost.includes(site.replace('www.', '')));
+        } else {
+            shouldBlock = !sites.some(site => currentHost.includes(site.replace('www.', '')));
+        }
+
+        console.log("Should block?", shouldBlock);
+        if (shouldBlock) {
+            injectContent();
+        }
+    }
+});
 
 const getHTML = async () => {
     const response = await fetch(chrome.runtime.getURL('landing.html'));
@@ -83,22 +102,4 @@ function injectContent() {
   });
 }
 
-if (!chrome.storage.local.get("breakTime")) {
-    if (chrome.storage.local.get("bwlist-mode") === "blacklist") {
-        chrome.storage.local.get("sites", (result) => {
-            sites = result.sites.map(genSiteURL);
-        });
-        if (sites.includes(window.location.hostname)) {
-            injectContent();
-        }
-    }
-    if (chrome.storage.local.get("bwlist-mode") === "whitelist") {
-        chrome.storage.local.get("sites", (result) => {
-            let sites = result.sites.map(genSiteURL);
-            sites = sites;
-        });
-        if (!sites.includes(window.location.hostname)) {
-            injectContent();
-    }
-}
-}
+
