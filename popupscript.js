@@ -144,17 +144,11 @@ let addTodoButton = document.querySelector("#add-todo");
 let todoX = document.querySelector("#todo-x");
 
 const updateTodos = () => {
-  chrome.storage.local.get("todos", (result) => {
-    if (result.todos) {
-        const todoList = document.querySelector(".todo-container");
-        result.todos.forEach(todo => {
-            let newTodoElement = document.createElement("div");
-            newTodoElement.classList.add("item");
-            newTodoElement.textContent = todo;
-            todoList.appendChild(newTodoElement);
-        });
-    }
-});
+  let todoList = document.querySelector(".site-container");
+  let todos = Array.from(todoList.querySelectorAll(".item")).map(el => el.textContent);
+    chrome.storage.local.set({ "todos": todos }, () => {
+        console.log("Todos updated:", todos);
+    });
 }
 
 todoButton.addEventListener('click', () => {
