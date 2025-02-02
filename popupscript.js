@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /*
 
-Stack Overflow reading (not mine, but it's where the code is from)
+Stack Overflow reading (not mine, but it's where some of the code is from)
 https://stackoverflow.com/questions/58132891/chrome-timer-extension-how-to-keep-timer-running-even-when-extension-is-closed
 
 */
