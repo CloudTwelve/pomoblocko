@@ -144,7 +144,7 @@ let addTodoButton = document.querySelector("#add-todo");
 let todoX = document.querySelector("#todo-x");
 
 const updateTodos = () => {
-  let todoList = document.querySelector(".site-container");
+  let todoList = document.querySelector(".todo-container");
   let todos = Array.from(todoList.querySelectorAll(".item")).map(el => el.textContent);
     chrome.storage.local.set({ "todos": todos }, () => {
         console.log("Todos updated:", todos);
@@ -153,21 +153,42 @@ const updateTodos = () => {
 
 todoButton.addEventListener('click', () => {
   displayLightbox("#todo-lightbox");
+  chrome.storage.local.get("todos", (result) => {
+    let todoList = document.querySelector(".todo-container");
+    todoList.innerHTML = '';
+    if (result.todos) {
+        result.todos.forEach(todo => {
+            let todoElement = document.createElement("div");
+            todoElement.classList.add("item");
+            todoElement.textContent = todo;
+            todoElement.addEventListener('click', () => {
+                todoElement.remove();
+                updateTodos();
+            });
+            todoList.appendChild(todoElement);
+        });
+    }
+});
 });
 
 addTodoButton.addEventListener('click', () => {
-  let todoInput = document.querySelector("#todo-input");
-  let todoList = document.querySelector(".todo-container");
-  let todo = todoInput.value;
-  if (todo) {
-      let newTodoElement = document.createElement("div");
-      newTodoElement.classList.add("item");
-      newTodoElement.textContent = todo;
-      todoList.appendChild(newTodoElement);
-      updateTodos();
-      todoInput.value = "";
+    let todoInput = document.querySelector("#todo-input");
+    let todoList = document.querySelector(".todo-container");
+    let todo = todoInput.value.trim();
+    if (todo) {
+        let newTodoElement = document.createElement("div");
+        newTodoElement.classList.add("item");
+        newTodoElement.textContent = todo;
+        // Add click handler for removal
+        newTodoElement.addEventListener('click', () => {
+            newTodoElement.remove();
+            updateTodos();
+        });
+        todoList.appendChild(newTodoElement);
+        updateTodos();
+        todoInput.value = "";
     }
-})
+});
 
 todoX.addEventListener('click', () => {
   hideLightbox("#todo-lightbox");

@@ -111,11 +111,6 @@ button:hover {
     word-break: break-all;
 }
 
-.todo-container {
-    background-color: #E8D6C5;
-    display: block;
-    padding: 3px;
-}
 
 .close {
     padding: 5px 10px;
