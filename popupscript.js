@@ -165,14 +165,14 @@ addTodoButton.addEventListener('click', () => {
   let todoInput = document.querySelector("#todo-input");
   let todoList = document.querySelector(".todo-container");
   let todo = todoInput.value;
-  let newTodoElement = document.createElement("div");
-  newTodoElement.classList.add("todo-item");
-  let newTodoText = document.createTextNode(todo);
-  newTodoElement.appendChild(newTodoText);
-  todoList.appendChild(newTodoElement);
-  todoInput.value = "";
-  todoInput.innerHTML = "Add another task";
-  updateTodos();
+  if (todo) {
+      let newTodoElement = document.createElement("div");
+      newTodoElement.classList.add("item");
+      newTodoElement.textContent = todo;
+      todoList.appendChild(newTodoElement);
+      updateTodos();
+      todoInput.value = "";
+    }
 })
 
 todoX.addEventListener('click', () => {
